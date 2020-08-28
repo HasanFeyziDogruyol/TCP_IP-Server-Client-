@@ -1,4 +1,4 @@
-
+#include <unistd.h> 
 #include <netdb.h> 
 #include <stdio.h> 
 #include <stdlib.h> 
@@ -8,7 +8,7 @@
  
 void func(int sockfd) 
 { 
-    char metin[80]; 
+    char metin[300]; 
     int n; 
     for (;;) { 
         bzero(metin, sizeof(metin)); 
@@ -29,7 +29,7 @@ void func(int sockfd)
   
 int main() 
 { 
-    int sockfd, connfd; 
+    int sockfd; 
     struct sockaddr_in SunucuBilgileri; 
   
     // soket oluşturma ve doğrulama
@@ -44,7 +44,7 @@ int main()
   
     // IP, PORT atama
     SunucuBilgileri.sin_family = AF_INET; 
-    SunucuBilgileri.sin_addr.s_addr = inet_addr("127.0.0.5"); 
+    SunucuBilgileri.sin_addr.s_addr = htonl(INADDR_ANY); 
     SunucuBilgileri.sin_port = htons(1234); 
   
     // istemci soketini sunucu soketine bağlayın
